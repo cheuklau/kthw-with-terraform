@@ -24,14 +24,7 @@ The local machine must have the following installed and in PATH:
 - cfssl/cfssl-json
 - kubectl
 
-`/scripts/local-setup.sh` will install the dependencies for Ubuntu users: 
-```
-cd scripts/
-chmod +x local-setup.sh
-./local-setup.sh
-```
-
- Refer to online documentation of each dependency for other operating systems.
+`scripts/local-setup.sh` will install the dependencies for Ubuntu users and is run as part of the main script `run-kthw.sh`. Refer to online documentation of each dependency for other operating systems.
 
 ## Run Instructions
 
