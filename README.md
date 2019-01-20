@@ -1,4 +1,4 @@
-# Kubernetes the Hard Way
+# Kubernetes the Hard Way with Terraform
 
 This repository contains code for automating the setup of a Kubernetes cluster using the method outlined in [Kubernetes the Hard Way](https://github.com/kelseyhightower/kubernetes-the-hard-way) onto AWS. There are simpler alternatives (e.g., Kubeadm, Kops for AWS, etc) that handle a lot of the intricacies, but this is simply a learning exercise. Terraform will be used to setup the AWS environment (VPC, subnets, security groups) and set up the Kubernetes cluster from an Ubuntu 16.04 Amazon Machine Image (AMI).
 
