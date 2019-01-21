@@ -1,4 +1,4 @@
-# Set up AWS networking resources
+# Set up AWS networking and provision EC2 instances
 module "aws" {
   source = "./modules/aws"
   AWS_ACCESS_KEY = "${var.AWS_ACCESS_KEY}"
@@ -7,7 +7,7 @@ module "aws" {
   PATH_TO_PUBLIC_KEY = "${var.PATH_TO_PUBLIC_KEY}"
 }
 
-# Set up Kubernetes cluster
+# Set up Kubernetes clusters
 module "kubernetes" {
   source = "./modules/kubernetes"
   AWS_ACCESS_KEY = "${var.AWS_ACCESS_KEY}"

@@ -2,3 +2,6 @@
 .DS_Store
 .terraform/
 vars.tf
+*tfstate*
+*.log
+temp

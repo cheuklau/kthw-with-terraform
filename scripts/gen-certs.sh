@@ -72,5 +72,9 @@ cfssl gencert \
   -config=ca-config.json \
   -profile=kubernetes \
   admin-csr.json | cfssljson -bare admin
-  
+
+# Generate the Kubelet client certificates
+echo 'Generating the kubelet client certificates...'
+
+
 echo '**************************************'
