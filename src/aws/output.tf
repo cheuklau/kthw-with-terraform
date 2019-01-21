@@ -1,37 +1,49 @@
 # Output public IP, private IP and public DNS of all EC2 instances
 
-output "MASTERPUBLIC" {
-  value = "${module.ec2.MASTERPUBLIC}"
+output "MASTERPUBLICIP" {
+  value = "${module.ec2.MASTERPUBLICIP}"
 }
 
-output "MASTERPRIVATE" {
-  value = "${module.ec2.MASTERPRIVATE}"
+output "MASTERPRIVATEIP" {
+  value = "${module.ec2.MASTERPRIVATEIP}"
 }
 
-output "MASTERDNS" {
-  value ="${module.ec2.MASTERDNS}"
+output "MASTERPUBLICDNS" {
+  value ="${module.ec2.MASTERPUBLICDNS}"
 }
 
-output "WORKERPUBLIC" {
-  value = "${module.ec2.WORKERPUBLIC}"
+output "MASTERPRIVATEDNS" {
+  value ="${module.ec2.MASTERPRIVATEDNS}"
 }
 
-output "WORKERPRIVATE" {
-  value = "${module.ec2.WORKERPRIVATE}"
+output "WORKERPUBLICIP" {
+  value = "${module.ec2.WORKERPUBLICIP}"
 }
 
-output "WORKERDNS" {
-  value ="${module.ec2.WORKERDNS}"
+output "WORKERPRIVATEIP" {
+  value = "${module.ec2.WORKERPRIVATEIP}"
 }
 
-output "NGINXPUBLIC" {
-  value = "${module.ec2.NGINXPUBLIC}"
+output "WORKERPUBLICDNS" {
+  value ="${module.ec2.WORKERPUBLICDNS}"
 }
 
-output "NGINXPRIVATE" {
-  value = "${module.ec2.NGINXPRIVATE}"
+output "WORKERPRIVATEDNS" {
+  value ="${module.ec2.WORKERPRIVATEDNS}"
 }
 
-output "NGINXDNS" {
-  value ="${module.ec2.NGINXDNS}"
+output "NGINXPUBLICIP" {
+  value = "${module.ec2.NGINXPUBLICIP}"
+}
+
+output "NGINXPRIVATEIP" {
+  value = "${module.ec2.NGINXPRIVATEIP}"
+}
+
+output "NGINXPUBLICDNS" {
+  value ="${module.ec2.NGINXPUBLICDNS}"
+}
+
+output "NGINXPRIVATEDNS" {
+  value ="${module.ec2.NGINXPRIVATEDNS}"
 }

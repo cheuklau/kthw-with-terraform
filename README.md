@@ -28,15 +28,14 @@ The local machine must have the following installed and in PATH:
 
 ## Run Instructions
 
-1. Make sure local build dependencies are met: `chmod +x local-setup.sh && ./local-setup.sh`
-2. Make sure environment variables `TF_VAR_AWS_ACCESS_KEY` and `TF_VAR_AWS_SECRET_KEY` are set:
+1. Make sure environment variables `TF_VAR_AWS_ACCESS_KEY` and `TF_VAR_AWS_SECRET_KEY` are set:
 - Go to AWS console
 - Click on username then `Security Credentials`
 - Click on `Access Keys` then `Create New Access Key`
 - `export TF_VAR_AWS_ACCESS_KEY=<aws access key> && export TF_VAR_AWS_SECRET_KEY=<aws secret key>`
-3. Make the build script executable: `cd src/ && chmod +x run-kthw.sh`
-4. Create SSH key-pair for EC2 instances: `ssh-keygen -f mykey`
-5. Run the build script. Sample configuration:
+2. Make the build script executable: `chmod +x run-kthw.sh`
+3. Create SSH key-pair for EC2 instances: `ssh-keygen -f mykey`
+4. Run the build script. Sample configuration:
 ```
 ./run-kthw.sh --aws-region us-west-2 \
               --aws-public-key /path/to/mykey.pub\

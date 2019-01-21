@@ -107,11 +107,11 @@ terraform output > ec2_resources.log
 echo 'Finished setting up AWS environment and EC2 instances!'
 echo '**************************************'
 
-# Generate certificates
-rm $BASEDIR/certs/* > /dev/null 2>&1 &
+# Generate and distribute certificates
+rm $BASEDIR/certs/*
 chmod +x $BASEDIR/scripts/gen-certs.sh
-$BASEDIR/scripts/gen-certs.sh
-mv ca* admin* $BASEDIR/certs/
+$BASEDIR/scripts/gen-certs.sh $PRIVATEKEY $BASEDIR
+mv *.json *.pem *.csr $BASEDIR/certs/
 
 # Run Terraform
 # terraform init
