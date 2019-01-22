@@ -96,7 +96,7 @@ EOF
 export AWS_DEFAULT_REGION='us-west-2' 
 mv vars.tf $BASEDIR/src/aws
 cd $BASEDIR/src/aws
-if [-d ".terraform"]; then
+if [ -d ".terraform" ]; then
   echo 'Using previous Terraform state...'
 else
   echo 'Initializing Terraform for AWS setup...'
@@ -107,11 +107,19 @@ terraform output > ec2_resources.log
 echo 'Finished setting up AWS environment and EC2 instances!'
 echo '**************************************'
 
-# Generate and distribute certificates
+# # Generate and distribute certificates
 rm $BASEDIR/certs/*
 chmod +x $BASEDIR/scripts/gen-certs.sh
 $BASEDIR/scripts/gen-certs.sh $PRIVATEKEY $BASEDIR
+
+# Generate kubernetes configuration files
+rm $BASEDIR/kubeconfigs/*
+chmod +x $BASEDIR/scripts/gen-kubeconfig.sh
+$BASEDIR/scripts/gen-kubeconfig.sh $PRIVATEKEY $BASEDIR
+
+# Move certificates and kubernetes configuration files
 mv *.json *.pem *.csr $BASEDIR/certs/
+mv *.kubeconfig $BASEDIR/kubeconfigs/
 
 # Run Terraform
 # terraform init

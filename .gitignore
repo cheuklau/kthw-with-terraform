@@ -5,3 +5,4 @@ vars.tf
 *tfstate*
 *.log
 temp
+/kubeconfigs
