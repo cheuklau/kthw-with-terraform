@@ -66,7 +66,25 @@ Once all smoke tests have passed, you should be able to now deploy your own obje
 Certificates are used to authenticate identity. Certificate Authorities (CA) issue and confirm that a certificate is valid. Kubernetes uses certificates for a variety of security functions. Different parts of the cluster will validate certificates using the CA we provision. We need to set up a local Certificate Authority then use it to generate the following certificates:
 - `admin`
 - `kubelet`
-- `controller-manager`
+- `kube-controller-manager`
 - `kube-proxy`
 - `kube-scheduler` 
 - `kube-api`
+
+### Generate Kubernetes Configuration Files
+
+Kube-config files contain information needed to connect and interact with `kube-api` including:
+- Location of the cluster
+- Allowed users and applications
+- Authentication data e.g., tokens and client certificates
+
+We need kube-config files for:
+- `admin`
+- `kubelet`
+- `kube-controller-manager`
+- `kube-proxy`
+- `kube-scheduler`
+
+### Generate Data Encryption Config
+
+Kubernetes support encrypting secret data, but this requires an encryption key. We need to generate encryption keys and pass them to the master nodes.

@@ -112,14 +112,19 @@ rm $BASEDIR/certs/*
 chmod +x $BASEDIR/scripts/gen-certs.sh
 $BASEDIR/scripts/gen-certs.sh $PRIVATEKEY $BASEDIR
 
-# Generate kubernetes configuration files
+# Generate and distribute kubernetes configuration files
 rm $BASEDIR/kubeconfigs/*
 chmod +x $BASEDIR/scripts/gen-kubeconfig.sh
 $BASEDIR/scripts/gen-kubeconfig.sh $PRIVATEKEY $BASEDIR
 
-# Move certificates and kubernetes configuration files
+# Move certificates and kubernetes configuration files for local storage
 mv *.json *.pem *.csr $BASEDIR/certs/
 mv *.kubeconfig $BASEDIR/kubeconfigs/
+
+# Generate data encryption keys and send to master nodes
+rm $BASEDIR/keys/*
+chmod +x $BASEDIR/scripts/gen-keys.sh
+$BASEDIR/scripts/gen-keys.sh $PRIVATEKEY $BASEDIR
 
 # Run Terraform
 # terraform init
