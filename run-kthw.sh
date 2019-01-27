@@ -126,6 +126,21 @@ rm $BASEDIR/keys/*
 chmod +x $BASEDIR/scripts/gen-keys.sh
 $BASEDIR/scripts/gen-keys.sh $PRIVATEKEY $BASEDIR
 
-# Run Terraform
-# terraform init
-# terraform apply
+# Bootstrap etcd cluster on kubernetes master nodes
+echo ' '
+echo '**************************************'
+echo 'Bootstrapping etcd cluster on master nodes...'
+rm $BASEDIR/scr/etcd/* > /dev/null 2>&1 &
+cat << EOF | tee vars.tf
+variable "AWS_ACCESS_KEY" {}
+variable "AWS_SECRET_KEY" {}
+variable "AWS_REGION" { default = "${REGION}" }
+variable "AWS_TYPE" { default = "${TYPE}" }
+variable "PATH_TO_PUBLIC_KEY" { default = "${PUBLICKEY}" }
+variable "PATH_TO_PRIVATE_KEY" { default = "${PRIVATEKEY}" }
+variable "NUM_MASTERS" { default = "${NMASTERS}" }
+variable "NUM_WORKERS" { default = "${NWORKERS}" }
+EOF
+mv vars.tf $BASEDIR/src/etcd
+chmod +x $BASEDIR/scripts/setup-etcd.sh
+$BASEDIR/scripts/setup-etcd.sh $BASEDIR

@@ -88,3 +88,7 @@ We need kube-config files for:
 ### Generate Data Encryption Config
 
 Kubernetes support encrypting secret data, but this requires an encryption key. We need to generate encryption keys and pass them to the master nodes.
+
+### Boostrap the Etcd Cluster
+
+Etcd is a distributed key-value store that Kubernetes uses to store its internal data about the state of the cluster. Etcd must be installed across all master nodes and configured to form a cluster. 
