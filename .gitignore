@@ -6,3 +6,4 @@ vars.tf
 *.log
 temp
 /kubeconfigs
+/keys

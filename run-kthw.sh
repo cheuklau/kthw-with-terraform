@@ -91,23 +91,18 @@ variable "PATH_TO_PRIVATE_KEY" { default = "${PRIVATEKEY}" }
 variable "NUM_MASTERS" { default = "${NMASTERS}" }
 variable "NUM_WORKERS" { default = "${NWORKERS}" }
 EOF
+export AWS_DEFAULT_REGION='us-west-2'
+mv vars.tf $BASEDIR/src/aws
 # There is a Terraform bug with defining the AWS region within modules
 # Setting it as an evironment variable overrides this
-export AWS_DEFAULT_REGION='us-west-2' 
-mv vars.tf $BASEDIR/src/aws
 cd $BASEDIR/src/aws
-if [ -d ".terraform" ]; then
-  echo 'Using previous Terraform state...'
-else
-  echo 'Initializing Terraform for AWS setup...'
-  terraform init
-fi
+terraform init
 terraform apply
 terraform output > ec2_resources.log
 echo 'Finished setting up AWS environment and EC2 instances!'
 echo '**************************************'
 
-# # Generate and distribute certificates
+# Generate and distribute certificates
 rm $BASEDIR/certs/*
 chmod +x $BASEDIR/scripts/gen-certs.sh
 $BASEDIR/scripts/gen-certs.sh $PRIVATEKEY $BASEDIR
@@ -123,14 +118,15 @@ mv *.kubeconfig $BASEDIR/kubeconfigs/
 
 # Generate data encryption keys and send to master nodes
 rm $BASEDIR/keys/*
-chmod +x $BASEDIR/scripts/gen-keys.sh
-$BASEDIR/scripts/gen-keys.sh $PRIVATEKEY $BASEDIR
+chmod +x $BASEDIR/scripts/gen-encrypt-key.sh
+$BASEDIR/scripts/gen-encrypt-key.sh $PRIVATEKEY $BASEDIR
+mv encryption-config.yaml $BASEDIR/keys/
 
 # Bootstrap etcd cluster on kubernetes master nodes
 echo ' '
 echo '**************************************'
 echo 'Bootstrapping etcd cluster on master nodes...'
-rm $BASEDIR/scr/etcd/* > /dev/null 2>&1 &
+rm $BASEDIR/src/etcd/vars.tf $BASEDIR/src/etcd/main.tf > /dev/null 2>&1 &
 cat << EOF | tee vars.tf
 variable "AWS_ACCESS_KEY" {}
 variable "AWS_SECRET_KEY" {}
@@ -143,4 +139,4 @@ variable "NUM_WORKERS" { default = "${NWORKERS}" }
 EOF
 mv vars.tf $BASEDIR/src/etcd
 chmod +x $BASEDIR/scripts/setup-etcd.sh
-$BASEDIR/scripts/setup-etcd.sh $BASEDIR
+$BASEDIR/scripts/setup-etcd.sh $PRIVATEKEY $BASEDIR

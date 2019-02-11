@@ -2,12 +2,20 @@ output "MASTERPUBLICIP" {
   value = "${join(",", aws_instance.kubernetes-master.*.public_ip)}"
 }
 
+output "MASTERPUBLICLISTIP" {
+  value = ["${aws_instance.kubernetes-master.*.public_ip}"]
+}
+
 output "MASTERPRIVATEIP" {
   value = "${join(",", aws_instance.kubernetes-master.*.private_ip)}"
 }
 
 output "MASTERPUBLICDNS" {
   value = "${join(",", aws_instance.kubernetes-master.*.public_dns)}"
+}
+
+output "MASTERPUBLICLISTDNS" {
+  value = ["${aws_instance.kubernetes-master.*.public_dns}"]
 }
 
 output "MASTERPRIVATEDNS" {

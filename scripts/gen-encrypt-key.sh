@@ -37,6 +37,7 @@ resources:
 EOF
 
 # Copy object to master nodes
+echo 'Distributing data encryption keys to each master node...'
 for ((i=0; i<${#masterpublicip[@]};++i)); do
 scp -i ${PRIVATEKEY} -o StrictHostKeyChecking=no encryption-config.yaml ubuntu@${masterpublicip[i]}:~/
 done

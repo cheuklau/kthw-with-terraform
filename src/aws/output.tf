@@ -4,12 +4,20 @@ output "MASTERPUBLICIP" {
   value = "${module.ec2.MASTERPUBLICIP}"
 }
 
+output "MASTERPUBLICLISTIP" {
+  value = ["${module.ec2.MASTERPUBLICLISTIP}"]
+}
+
 output "MASTERPRIVATEIP" {
   value = "${module.ec2.MASTERPRIVATEIP}"
 }
 
 output "MASTERPUBLICDNS" {
   value ="${module.ec2.MASTERPUBLICDNS}"
+}
+
+output "MASTERPUBLICLISTDNS" {
+  value = ["${module.ec2.MASTERPUBLICLISTDNS}"]
 }
 
 output "MASTERPRIVATEDNS" {

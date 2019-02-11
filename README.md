@@ -44,7 +44,7 @@ The local machine must have the following installed and in PATH:
               --num-kube-masters 2 \
               --num-kube-workers 2
 ```
-- The above example spins up two master nodes, two worker nodes and one node for the Nginx load balancer (all of t2.micro size and running in us-west-2). Note that every node allows all incoming and outgoing connections! Please secure as necessary within AWS security group settings!
+- The above example spins up two master nodes, two worker nodes, and one node for the Nginx load balancer (all of t2.micro size and running in us-west-2). Note that every node allows all incoming and outgoing connections! Please secure as necessary within AWS security group settings!
 
 ## Running Smoke Tests
 
@@ -57,7 +57,7 @@ chmod + x run-smoke.sh
 
 ## Working with the Kubernetes Cluster
 
-Once all smoke tests have passed, you should be able to now deploy your own objects as necessary using `kubectl`.
+Once all smoke tests have passed, you should be able to now deploy your own objects as necessary using `kubectl` from your local machine.
 
 ## What is Happening Behind the Scenes
 
@@ -89,6 +89,10 @@ We need kube-config files for:
 
 Kubernetes support encrypting secret data, but this requires an encryption key. We need to generate encryption keys and pass them to the master nodes.
 
-### Boostrap the Etcd Cluster
+### Bootstrap the Etcd Cluster
 
-Etcd is a distributed key-value store that Kubernetes uses to store its internal data about the state of the cluster. Etcd must be installed across all master nodes and configured to form a cluster. 
+Etcd is a distributed key-value store that Kubernetes uses to store its internal data about the state of the cluster. Etcd must be installed across all master nodes and configured to form a cluster.
+
+## Current State
+
+There is still a bug with bootstrapping the ETCD cluster. Internal IP environment variable is being set as the curl command on the instance!
